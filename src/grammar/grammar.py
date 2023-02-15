@@ -1,26 +1,15 @@
 import random
-from typing import List
+from typing import List, Tuple
+from .finite_automaton import FiniteAutomaton
 
 
 class Grammar:
-    _vn: List[str] = []
-    _vt: List[str] = []
-    _p: List[List[str]] = []
+    def __init__(self, vn: List[str], vt: List[str], p: List[Tuple[str, str, str]]) -> None:
+        self._vn: List[str] = vn
+        self._vt: List[str] = vt
+        self._p: List[Tuple[str, str, str]] = p
 
-    def __init__(self, vn: List[str], vt: List[str], p: List[List[str]]) -> None:
-        self._vn = vn
-        self._vt = vt
-        self._p = p
-
-    def get_indices(self, string: str) -> List[int]:
-        result: List[int] = []
-        for pr in self._p:
-            print(pr, string)
-            if string == pr[0]:
-                result.append(self._p.index(pr))
-        return result
-
-    def generate_string(self, string: str) -> None:
+    def generate_string(self, string: str) -> str:
         flag: bool = True
 
         while flag:
@@ -34,7 +23,17 @@ class Grammar:
                     string = string[:i] + r + string[i + 1:]
                     flag = True
 
-        print(string)
+        return string[:-1]
+
+    def to_finite_automaton(self) -> FiniteAutomaton:
+        return FiniteAutomaton(self._p)
+
+    def get_indices(self, string: str) -> List[int]:
+        result: List[int] = []
+        for tran in self._p:
+            if string == tran[0]:
+                result.append(self._p.index(tran))
+        return result
 
     def is_terminal(self, string: str) -> bool:
         return string in self._vt
@@ -43,4 +42,4 @@ class Grammar:
         return string in self._vn
 
     def get_rule(self, index: int) -> str:
-        return self._p[index][1]
+        return self._p[index][1] + self._p[index][2]
