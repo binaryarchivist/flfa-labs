@@ -1,5 +1,6 @@
 import random
 from typing import List, Tuple
+
 from .finite_automaton import FiniteAutomaton
 
 
@@ -18,7 +19,7 @@ class Grammar:
                 if self.is_non_terminal(string[i]):
                     choices: List[int] = self.get_indices(string[i])
                     rule_index: int = random.choice(choices)
-                    r = self.get_rule(rule_index)
+                    r: str = self.get_rule(rule_index)
 
                     string = string[:i] + r + string[i + 1:]
                     flag = True
