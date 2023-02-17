@@ -27,7 +27,7 @@ class Grammar:
         return string[:-1]
 
     def to_finite_automaton(self) -> FiniteAutomaton:
-        return FiniteAutomaton(self._p)
+        return FiniteAutomaton(self._vn, self._vt, self._p)
 
     def get_indices(self, string: str) -> List[int]:
         result: List[int] = []
