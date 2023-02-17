@@ -27,7 +27,6 @@ class FiniteAutomaton:
             for i in temp2:
                 if i[2] != '':
                     transitions.append(i)
-                    print(transitions)
                     if i[2] not in new_states:
                         current_states.append(i[2])
         self.states = new_states
