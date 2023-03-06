@@ -1,9 +1,6 @@
 import random
 from typing import List, Tuple
 
-from .finite_automaton import FiniteAutomaton
-
-
 class Grammar:
     def __init__(self, vn: List[str], vt: List[str], p: List[Tuple[str, str, str]]) -> None:
         self._vn: List[str] = vn
@@ -25,9 +22,6 @@ class Grammar:
                     flag = True
 
         return string[:-1]
-
-    def to_finite_automaton(self) -> FiniteAutomaton:
-        return FiniteAutomaton(self._vn, self._vt, self._p)
 
     def get_indices(self, string: str) -> List[int]:
         result: List[int] = []
