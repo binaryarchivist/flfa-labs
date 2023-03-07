@@ -93,6 +93,15 @@ class Converter:
 
         return FiniteAutomaton(Q, sigma, delta, '0', 'X')
 ```
+* Determining if its NFA
+```python
+    def is_nfa(self) -> bool:
+        for tran in self.delta:
+            for t in self.delta:
+                if (tran[0], tran[1]) == (t[0], t[1]) and self.delta.index(tran) != self.delta.index(t):
+                    return True
+        return False
+```
 
 * Converting NFA to DFA
 
