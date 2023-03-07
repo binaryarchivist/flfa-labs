@@ -1,4 +1,6 @@
 from typing import Tuple, List
+import networkx as nx
+import matplotlib.pyplot as plt
 
 Transition = Tuple[str, str, str]
 
@@ -12,6 +14,7 @@ class FiniteAutomaton:
         self.start_state: str = start_state
         self.accept_states: str = accept_states
 
+    # lab2 3.c
     def to_deterministic(self) -> None:
         current_states: List[str] = [self.start_state]
         delta: List[Transition] = []
@@ -57,10 +60,29 @@ class FiniteAutomaton:
             current_state = temp_state
         return current_state in self.accept_states
 
-    # lab2 3b
+    # lab2 3.b
     def is_nfa(self) -> bool:
         for tran in self.delta:
             for t in self.delta:
                 if (tran[0], tran[1]) == (t[0], t[1]) and self.delta.index(tran) != self.delta.index(t):
                     return True
         return False
+    
+    # lab2 3.d
+    def graph(self) -> None:
+        G = nx.DiGraph()
+
+        for state in self.Q:
+            G.add_node(state)
+        
+        print(self.delta)
+        for current_state, char, next_state in self.delta:
+            if next_state != 'X':
+              G.add_edge(current_state, next_state, weight=char)
+            
+        graph = nx.circular_layout(G)
+        nx.draw(G, graph, with_labels = True)
+        nx.draw_networkx_edge_labels(G, graph)
+        plt.show()
+
+            

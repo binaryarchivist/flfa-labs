@@ -1,6 +1,7 @@
 from typing import List, Tuple
 
-from modules import Grammar, FiniteAutomaton
+from grammar_impl import Grammar
+from finite_automaton import FiniteAutomaton
 
 
 # helper class for lab2 to avoid circular dependency 3.a
@@ -46,6 +47,8 @@ def main() -> int:
 
     s = grammar.generate_string("0")
     print("string: ", s, " fa:", fa.accepts(s))
+
+    fa.graph()
     # for _ in range(1, 50):
     #     s = grammar.generate_string("0")
     # print("string: ", s, " fa:", fa.accepts(s))

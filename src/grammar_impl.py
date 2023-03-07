@@ -11,7 +11,7 @@ class Grammar:
     def get_type(self, string: str) -> str:
         types: List[bool] = [False, False, False, False]
         types[3] = True  # Type 3
-
+        # todo
 
         return "Type 3"
 
