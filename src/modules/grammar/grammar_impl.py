@@ -9,7 +9,6 @@ class Grammar:
 
     def generate_string(self, string: str) -> str:
         flag: bool = True
-
         while flag:
             flag = False
             for i in range(len(string)):
@@ -20,7 +19,6 @@ class Grammar:
 
                     string = string[:i] + r + string[i + 1:]
                     flag = True
-
         return string[:-1]
 
     def get_indices(self, string: str) -> List[int]:

@@ -10,28 +10,48 @@ class Converter:
         return
     
     def to_grammar(self, fa: FiniteAutomaton) -> Grammar:
-        return Grammar(fa.states, fa.alphabet, fa.transitions)
+        vt = fa.sigma
+        vn = fa.Q
+        p = fa.delta
+        return Grammar(vn, vt, p)
 
     def to_automaton(self, grammar: Grammar) -> FiniteAutomaton:
-        return FiniteAutomaton(grammar._vn, grammar._vt, grammar._p, 'Q0', {'Q3'})
+        Q = grammar._vn
+        sigma = grammar._vt
+        delta = grammar._p
+
+        return FiniteAutomaton(Q, sigma, delta, '0', 'X')
+
 
 def main() -> int:
-    vn: List[str] = ["Q0", "Q1", "Q2", "Q3"]
-    vt: List[str] = ["a", "b"]
-    p: List[Tuple[str, str, str]] = [
-        ('Q0', 'a', 'Q0'),
-        ('Q0', 'a', 'Q1'),
-        ('Q1', 'b', 'Q2'),
-        ('Q2', 'a', 'Q2'),
-        ('Q3', 'a', 'Q3'),
-        ('Q2', 'b', 'Q3'),
+    Q: List[str] = ['0', '1', '2', '3']
+    sigma: List[str] = ['a', 'b']
+    delta: List[Tuple[str, str, str]] = [
+        ('0', 'a', '0'),
+        ('0', 'a', '1'),
+        ('1', 'b', '2'),
+        ('2', 'a', '2'),
+        ('3', 'a', '3'),
+        ('3', 'a', 'X'),
+        ('2', 'b', '3'),
+        ('2', 'b', 'X')
     ]
+
     converter: Converter = Converter()
 
-    grammar: Grammar = Grammar(vn, vt, p)
+    grammar: Grammar = Grammar(Q, sigma, delta)
     fa: FiniteAutomaton = converter.to_automaton(grammar)
     fa.to_deterministic()
-    print(fa.transitions)
+    print(fa.is_nfa())
+    print(fa.delta)
+
+
+    s = grammar.generate_string("0")
+    print("string: ", s, " fa:", fa.accepts(s))
+    # for _ in range(1, 50):
+    #     s = grammar.generate_string("0")
+        # print("string: ", s, " fa:", fa.accepts(s))
+
     return 0
 
 
