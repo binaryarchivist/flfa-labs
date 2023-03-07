@@ -1,14 +1,13 @@
 from typing import List, Tuple
 
 from modules import Grammar, FiniteAutomaton
-import networkx as nx
-import matplotlib.pyplot as plt
+
 
 # helper class for lab2 to avoid circular dependency 3.a
 class Converter:
     def __init__(self):
         return
-    
+
     def to_grammar(self, fa: FiniteAutomaton) -> Grammar:
         vt = fa.sigma
         vn = fa.Q
@@ -45,12 +44,11 @@ def main() -> int:
     print(fa.is_nfa())
     print(fa.delta)
 
-
     s = grammar.generate_string("0")
     print("string: ", s, " fa:", fa.accepts(s))
     # for _ in range(1, 50):
     #     s = grammar.generate_string("0")
-        # print("string: ", s, " fa:", fa.accepts(s))
+    # print("string: ", s, " fa:", fa.accepts(s))
 
     return 0
 

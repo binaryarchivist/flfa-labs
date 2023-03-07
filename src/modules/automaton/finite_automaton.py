@@ -4,14 +4,14 @@ Transition = Tuple[str, str, str]
 
 
 class FiniteAutomaton:
-    def __init__(self, Q: List[str], sigma: List[str], delta: List[Transition], start_state: str, accept_states: str) -> None:
+    def __init__(self, Q: List[str], sigma: List[str], delta: List[Transition], start_state: str,
+                 accept_states: str) -> None:
         self.delta: List[Transition] = delta
         self.sigma: List[str] = sigma
         self.Q: List[str] = Q
         self.start_state: str = start_state
         self.accept_states: str = accept_states
 
-    
     def to_deterministic(self) -> None:
         current_states: List[str] = [self.start_state]
         delta: List[Transition] = []
@@ -65,4 +65,3 @@ class FiniteAutomaton:
                 if (tran[0], tran[1]) == (t[0], t[1]) and self.delta.index(tran) != self.delta.index(t):
                     return True
         return False
-

@@ -1,11 +1,22 @@
 import random
 from typing import List, Tuple
 
+
 class Grammar:
     def __init__(self, vn: List[str], vt: List[str], p: List[Tuple[str, str, str]]) -> None:
         self._vn: List[str] = vn
         self._vt: List[str] = vt
         self._p: List[Tuple[str, str, str]] = p
+
+    def get_type(self, string: str) -> str:
+        types: List[bool] = [False, False, False, False]
+        types[3] = True  # Type 3
+
+
+        return "Type 3"
+
+
+
 
     def generate_string(self, string: str) -> str:
         flag: bool = True
