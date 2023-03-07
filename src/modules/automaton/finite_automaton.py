@@ -33,7 +33,7 @@ class FiniteAutomaton:
                         current_states.append(i[2])
                         if self.accept_states in i[2]:
                             self.accept_states = i[2]
-        self.states = new_states
+        self.Q = new_states
         self.delta = delta
 
     def get_transitions(self, state) -> List[Transition]:
@@ -55,7 +55,6 @@ class FiniteAutomaton:
             if temp_state is None:
                 return False
             current_state = temp_state
-        print(current_state)
         return current_state in self.accept_states
 
     # lab2 3b
