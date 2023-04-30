@@ -1,7 +1,6 @@
 import pprint
 from grammar_impl import Grammar
 
-
 '''
 V18
 1) Eliminate epsilon productions
@@ -17,7 +16,7 @@ P = {
 1. S -> aB
 2. S -> bA
 3. S -> B
-4. A -> b
+4. A -> b   
 5. A -> aD
 6. A -> AS
 7. A -> bAB
@@ -41,36 +40,38 @@ p = {
 start_symbol = 'S'
 
 grammar = Grammar(vn, vt, p, start_symbol)
-for k,v in grammar.p.items():
-    print(k,v)
+for k, v in grammar.p.items():
+    print(k, v)
 print('---')
 grammar.eliminate_epsilon()
+
 # S ['aB', 'B', 'b', 'bA']
 # A ['bAB', 'b', 'S', 'aD', 'AS', 'bB']
 # B ['bS', 'a']
 # C ['AB', 'B']
 # D ['BB']
-for k,v in grammar.p.items():
-    print(k,v)
+
+for k, v in grammar.p.items():
+    print(k, v)
 print('---')
 grammar.eliminate_renaming()
+
 # S ['bA', 'aB', 'b']
 # A ['AS', 'b', 'aD', 'bAB', 'bB']
 # B ['a', 'bS']
 # C ['AB']
 # D ['BB']
 
-for k,v in grammar.p.items():
-    print(k,v)
+# for k, v in grammar.p.items():
+#     print(k, v)
+# print('---')
+#
+grammar.eliminate_inaccessible()
+for k, v in grammar.p.items():
+    print(k, v)
 print('---')
 
-# grammar.eliminate_inaccessible()
-# for k,v in grammar.p.items():
-#     print(k,v)
-# print('---')
 
-
-
-grammar.eliminate_non_productive_rules()
-print(grammar.vn)
-
+# grammar.cfg_to_cnf()
+# for k, v in grammar.p.items():
+#     print(k, v)
